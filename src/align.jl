@@ -11,15 +11,51 @@ include("align_viz.jl")
 
 
 """
+    align(fp1::AbstractString, fp2::AbstractString)
+    align(; thresh::Union{Int,Bool}=false, submatfp::AbstractString="data/BLOSUM62",
+          gap_open::Int=-12, gap_extend::Int=-4, dedup::Bool=true,
+          dedup_method::AbstractString="score", global_align::Bool=true,
+          global_gap_open::Int=-12, global_gap_extend::Int=-4, global_end_gap_open::Int=0,
+          global_end_gap_extend::Int=0, print::Bool=true, figure::Bool=true,
+          figure_type::AbstractString="interactive", figurewidth::Int=1000)
+
+Identify local alignments between sequence pair at filepaths `fp1` and `fp2`.  
+  
+Optionally, visualize these alignments through a printout or graph; and optionally include
+a global alignment in this graph for comparison.
+
+...
+## Arguments:
+- `fp1::AbstractString`: fasta file containing sequence 1.
+- `fp2::AbstractString`: fasta file containing sequence 2.
+- `thresh::Union{Int,Bool}=false`: score threshold for the suboptimal local alignments;
+    calculated if set to `false`.
+- `submatfp::AbstractString="data/BLOSUM62"`: filepath for substitution matrix.
+- `gap_open::Int=-12`: penalty for gap opening.
+- `gap_extend::Int=-4`: penalty for gap extension.
+- `dedup::Bool=true`: whether to deduplicate the local alignments.
+- `dedup_method::AbstractString="score"`: method of local alignment deduplication; for
+    `score`, keeps all highest-scoring alignments along each unique path; for `length`,
+    keeps only the longest alignment along each unique path.
+- `global_align::Bool=true`: whether to identify a global alignment.
+- `global_gap_open::Int=-12`: penalty for gap opening in the global alignment.
+- `global_gap_extend::Int=-4`: penalty for gap extension in the global alignment.
+- `global_end_gap_open::Int=0`: penalty for end gap opening in the global alignment.
+- `global_end_gap_extend::Int=0`: penalty for end gap extension in the global alignment.
+- `print::Bool=true`: whether to print out a color-coded view of the local alignments.
+- `figure::Bool=true`: whether to return a graph of the alignments.
+- `figure_type::AbstractString="interactive"`: the type of the graph; `interactive` or
+    `static`.
+- `figurewidth::Int=1000`: the figure width of the alignment graph.
 """
-function align(fp1, fp2;
-               thresh=false, submatfp="data/BLOSUM62",
-               gap_open=-12, gap_extend=-4,
-               dedup=true, dedup_method="score",
-               global_align=true, global_gap_open=-12, global_gap_extend=-4,
-               global_end_gap_open=0, global_end_gap_extend=0,
-               print=true, figure=true, figure_type="interactive",
-               figurewidth=1000)
+function align(fp1::AbstractString, fp2::AbstractString;
+               thresh::Union{Int,Bool}=false, submatfp="data/BLOSUM62",
+               gap_open::Int=-12, gap_extend::Int=-4,
+               dedup::Bool=true, dedup_method::AbstractString="score",
+               global_align::Bool=true, global_gap_open::Int=-12, global_gap_extend::Int=-4,
+               global_end_gap_open::Int=0, global_end_gap_extend::Int=0,
+               print::Bool=true, figure::Bool=true, figure_type::AbstractString="interactive",
+               figurewidth::Int=1000)
 
     seqA_id, seqA = ReadInput(fp1)
     seqB_id, seqB = ReadInput(fp2)
