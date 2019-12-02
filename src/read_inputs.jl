@@ -28,7 +28,7 @@ headers and a matrix of the substitution scores.
 The input file should be formatted with the headers on the first line but not in the first
 column and use space-delimitation.
 """
-function ReadSubMatrix(fp::AbstractString="data/BLOSUM62.txt")
+function read_sub_matrix(fp::AbstractString="data/BLOSUM62.txt")
     (sub_matrix, sub_header) = readdlm(fp, header=true)
     sub_header = Dict([(uppercase(x[1]), i) for (i, x) in enumerate(sub_header)])
     return (sub_header, sub_matrix)
