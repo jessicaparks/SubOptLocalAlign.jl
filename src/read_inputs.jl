@@ -37,4 +37,4 @@ function read_sub_matrix(fp::AbstractString)
     return (sub_header, sub_matrix)
 end
 
-const BLOSUM62 = read_sub_matrix("data/BLOSUM62")
+const BLOSUM62 = read_sub_matrix(joinpath(dirname(@__FILE__), "data", "BLOSUM62"))
