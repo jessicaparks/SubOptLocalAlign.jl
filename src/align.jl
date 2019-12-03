@@ -70,7 +70,7 @@ function align(fp1::AbstractString, fp2::AbstractString;
     end
     
     if print
-        local_align_print(seqA_id, seqB_id, am2, sub_header, sub_matrix)
+        local_align_print(seqA_id, seqB_id, am, sub_header, sub_matrix)
     end
     
     if figure
