@@ -14,8 +14,8 @@
         positions::Array{Array{Tuple{Int,Int},1},1})
     traceback(; thresh::Int=0, dedup::Bool=true,
         current_alignment::Tuple{String,String}=("",""),
-        current_scores::Array{Int,1}=[],
-        current_positions::Array{Tuple{Int,Int},1}=[],
+        current_scores::Array{Int,1}=Array{Int,1}(),
+        current_positions::Array{Tuple{Int,Int},1}=Array{Tuple{Int,Int},1}(),
         maxpathscore::Union{Int,Bool}=false)
   
 Trace path back through matrix to identify alignments. Push output to `alignments`,
@@ -35,9 +35,9 @@ Trace path back through matrix to identify alignments. Push output to `alignment
 - `thresh::Int=0`: score threshold for the alignment.
 - `dedup::Bool=true`: whether alignments should be deduplicated.
 - `current_alignment::Tuple{String,String}=("","")`: sequences of the current alignment.
-- `current_scores::Array{Int,1}=[]`: scores at each position along the current alignment.
-- `current_positions::Array{Tuple{Int,Int},1}=[]`: coordinates of each position in the
-    current alignment.
+- `current_scores::Array{Int,1}=Array{Int,1}()`: scores at each position along the current alignment.
+- `current_positions::Array{Tuple{Int,Int},1}=Array{Tuple{Int,Int},1}()`: coordinates of
+    each position in the current alignment.
 - `maxpathscore::Union{Int,Bool}=false`: the maximum score along the traceback path,
     starts at `false`.
 """
@@ -47,8 +47,8 @@ function traceback(align_pos::CartesianIndex{2}, trace_matrix::Array{Array{Int,1
                    positions::Array{Array{Tuple{Int,Int},1},1};
                    thresh::Int=0, dedup::Bool=true,
                    current_alignment::Tuple{String,String}=("",""),
-                   current_scores::Array{Int,1}=[],
-                   current_positions::Array{Tuple{Int,Int},1}=[],
+                   current_scores::Array{Int,1}=Array{Int,1}(),
+                   current_positions::Array{Tuple{Int,Int},1}=Array{Tuple{Int,Int},1}(),
                    maxpathscore::Union{Int,Bool}=false)
 
     (a, b) = Tuple(align_pos)
