@@ -31,7 +31,7 @@ a global alignment in this graph for comparison.
 - `dedup_method::AbstractString="score"`: method of local alignment deduplication; for
     `score`, keeps all highest-scoring alignments along each unique path; for `length`,
     keeps only the longest alignment along each unique path.
-- `global_align::Bool=true`: whether to identify a global alignment.
+- `global_alignment::Bool=true`: whether to identify a global alignment.
 - `global_gap_open::Int=-12`: penalty for gap opening in the global alignment.
 - `global_gap_extend::Int=-4`: penalty for gap extension in the global alignment.
 - `global_end_gap_open::Int=0`: penalty for end gap opening in the global alignment.
@@ -46,7 +46,7 @@ function align(fp1::AbstractString, fp2::AbstractString;
                thresh::Union{Int,Bool}=false, submatfp::Union{AbstractString,Bool}=false,
                gap_open::Int=-12, gap_extend::Int=-4,
                dedup::Bool=true, dedup_method::AbstractString="score",
-               global_align::Bool=true, global_gap_open::Int=-12, global_gap_extend::Int=-4,
+               global_alignment::Bool=true, global_gap_open::Int=-12, global_gap_extend::Int=-4,
                global_end_gap_open::Int=0, global_end_gap_extend::Int=0,
                print::Bool=true, figure::Bool=true, figure_type::AbstractString="interactive",
                figurewidth::Int=1000)
@@ -63,7 +63,7 @@ function align(fp1::AbstractString, fp2::AbstractString;
         thresh=thresh, gap_open=gap_open, gap_extend=gap_extend,
         dedup=dedup, dedup_method=dedup_method)
     
-    if global_align
+    if global_alignment
         gsm, gtm, gam = global_align(seqA, seqB, sub_header, sub_matrix;
             gap_open=global_gap_open, gap_extend=global_gap_extend,
             end_gap_open=global_end_gap_open, end_gap_extend=global_end_gap_extend)

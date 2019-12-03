@@ -77,7 +77,7 @@ end
 
 
 """
-dedup(align_pos, trace_matrix, score_matrix, thresh, lenA, lenB)
+deduplicate(align_pos, trace_matrix, score_matrix, thresh, lenA, lenB)
 identify whether the alignment end position has any parents in the trace matrix
 where a parent is a next alignment position that would contain this position in its alignment
 
@@ -92,7 +92,7 @@ lenB: length of seqB + 1 (the max size of the alignment in the b direction)
 Returns:
 (bool): true if the alignment position is contained within a parent alignment, false if not;
 """
-function dedup(align_pos, trace_matrix, score_matrix, thresh, lenA, lenB)
+function deduplicate(align_pos, trace_matrix, score_matrix, thresh, lenA, lenB)
     (a, b) = Tuple(align_pos)
     if a==lenA && b==lenB
         return false
@@ -166,7 +166,7 @@ function local_align(seqA, seqB, sub_header, sub_matrix;
     if dedup
         align_ends = [
             pos for pos in align_ends 
-                if !dedup(pos, trace_matrix, score_matrix, thresh, length(seqA)+1, length(seqB)+1)]
+                if !deduplicate(pos, trace_matrix, score_matrix, thresh, length(seqA)+1, length(seqB)+1)]
     end
     all_alignments = []
     for align_pos in align_ends
