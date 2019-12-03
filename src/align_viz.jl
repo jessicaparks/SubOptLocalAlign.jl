@@ -4,10 +4,12 @@
 # Visualizations for pairwise local alignments.
 
 
-import Plots
-import Plots.PlotMeasures
-import PlotlyJS
-
+using Plots.ColorGradient
+using Plots.PlotMeasures
+using Plots.plot
+using PlotlyJS.Layout
+using PlotlyJS.scatter
+using PlotlyJS.plot
 
 """
 print_in_color(text, rgbcolor, colorbkgd, colortext, bold)
