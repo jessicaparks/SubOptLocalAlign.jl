@@ -64,7 +64,7 @@ function global_align(seqA, seqB, sub_header, sub_matrix;
     max_i = argmax(score_matrix[m,:])
     max_j = argmax(score_matrix[:,n])
     max_ij = argmax([score_matrix[m,max_i], score_matrix[max_j,n]])
-    (i, j) = x==1 ? [m,max_i] : [max_j,n]
+    (i, j) = max_ij==1 ? [m,max_i] : [max_j,n]
     align_end = [i, j]
     best_score = score_matrix[i,j]
     
