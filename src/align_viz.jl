@@ -4,6 +4,11 @@
 # Visualizations for pairwise local alignments.
 
 
+using Plots
+using Plots.PlotMeasures
+using PlotlyJS
+
+
 """
 PrintInColor(text, rgbcolor, colorbkgd, colortext, bold)
 prints RGB-colored background or text on a 0-255 scale
