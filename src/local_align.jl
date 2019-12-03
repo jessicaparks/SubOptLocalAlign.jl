@@ -6,7 +6,7 @@
 
 
 """
-    traceback(align_pos::CartesianIndex{2},
+    traceback(align_pos::Union{CartesianIndex{2},Tuple{Int,Int}},
         trace_matrix::Array{Array{Int,1},2}, score_matrix::Array{Int,2},
         seqA::String, seqB::String,
         alignments::Array{Tuple{String,String},1},
@@ -23,8 +23,8 @@ Trace path back through matrix to identify alignments. Push output to `alignment
   
 ---
 # Arguments:
-- `align_pos::CartesianIndex{2}`: coordinates of the alignment end position, and then
-    each current position as the traceback continues.
+- `align_pos::Union{CartesianIndex{2},Tuple{Int,Int}}`: coordinates of the alignment end
+    position, and then each current position as the traceback continues.
 - `trace_matrix::Array{Array{Int,1},2}`: alignment traceback matrix.
 - `score_matrix::Array{Int,2}`: score matrix for the alignment.
 - `seqA::String`: first input sequence.
@@ -41,8 +41,9 @@ Trace path back through matrix to identify alignments. Push output to `alignment
 - `maxpathscore::Union{Int,Bool}=false`: the maximum score along the traceback path,
     starts at `false`.
 """
-function traceback(align_pos::CartesianIndex{2}, trace_matrix::Array{Array{Int,1},2},
-                   score_matrix::Array{Int,2}, seqA::String, seqB::String,
+function traceback(align_pos::Union{CartesianIndex{2},Tuple{Int,Int}},
+                   trace_matrix::Array{Array{Int,1},2}, score_matrix::Array{Int,2},
+                   seqA::String, seqB::String,
                    alignments::Array{Tuple{String,String},1}, scores::Array{Array{Int,1},1},
                    positions::Array{Array{Tuple{Int,Int},1},1};
                    thresh::Int=0, dedup::Bool=true,
