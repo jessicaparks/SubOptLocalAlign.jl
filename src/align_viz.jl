@@ -13,8 +13,8 @@ using PlotlyJS
 """
     print_in_color(text::AbstractString, rgbcolor::RGB{Float64})
     print_in_color(; colorbkgd::Bool=true, colortext::Bool=false, bold::Bool=false)
-
-prints RGB-colored background or text on a 0-255 scale
+  
+Print RGB-colored background or text.
 """
 function print_in_color(text::AbstractString, rgbcolor::RGB{Float64};
                         colorbkgd::Bool=true, colortext::Bool=false, bold::Bool=false)
@@ -34,7 +34,7 @@ end
         alignments::Array{Array{Any,1},1}, sub_header::Dict{Char,Int64},
         sub_matrix::Array{Float64,2})
   
-Print out the local alignments between two sequences.
+Print the local alignments between two sequences in colored text.
 
 ---
 # Arguments:
@@ -90,10 +90,12 @@ end
 
 
 """
-    i_local_align_viz(seqA::AbstractString, seqB::AbstractString, seqA_id::AbstractString,
-        seqB_id::AbstractString, alignments::Array{Array{Any,1},1},
+    i_local_align_viz(seqA::AbstractString, seqB::AbstractString,
+        seqA_id::AbstractString, seqB_id::AbstractString,
+        alignments::Array{Array{Any,1},1},
         sub_header::Dict{Char,Int64}, sub_matrix::Array{Float64,2};
-        global_alignment::Union{Array{Any,1},Bool}=false, figurewidth::Int=1000)
+        global_alignment::Union{Array{Any,1},Bool}=false,
+        figurewidth::Int=1000)
   
 Interactive visualization of the local alignments between two sequences.
 
@@ -188,10 +190,12 @@ end
 
 
 """
-    s_local_align_viz(seqA::AbstractString, seqB::AbstractString, seqA_id::AbstractString,
-        seqB_id::AbstractString, alignments::Array{Array{Any,1},1},
+    s_local_align_viz(seqA::AbstractString, seqB::AbstractString,
+        seqA_id::AbstractString, seqB_id::AbstractString,
+        alignments::Array{Array{Any,1},1},
         sub_header::Dict{Char,Int64}, sub_matrix::Array{Float64,2};
-        global_alignment::Union{Array{Any,1},Bool}=false, figurewidth::Int=1000
+        global_alignment::Union{Array{Any,1},Bool}=false,
+        figurewidth::Int=1000)
   
 Static visualization of the local alignments between two sequences.
   
