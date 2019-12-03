@@ -46,7 +46,7 @@ function traceback(align_pos, trace_matrix, score_matrix, seqA, seqB, alignments
             push!(positions, current_positions)
         end
         if 2 in trace
-            TraceBack(
+            traceback(
                 (a-1,b-1), trace_matrix, score_matrix, seqA, seqB, alignments, scores, positions,
                 thresh=thresh, dedup=dedup, 
                 current_alignment=(string(seqA[a-1], current_alignment[1]), string(seqB[b-1], current_alignment[2])),
@@ -55,7 +55,7 @@ function traceback(align_pos, trace_matrix, score_matrix, seqA, seqB, alignments
                 maxpathscore=maxpathscore)
         end
         if 3 in trace
-            TraceBack(
+            traceback(
                 (a-1,b), trace_matrix, score_matrix, seqA, seqB, alignments, scores, positions,
                 thresh=thresh, dedup=dedup, 
                 current_alignment=(string(seqA[a-1], current_alignment[1]), string("-", current_alignment[2])),
@@ -64,7 +64,7 @@ function traceback(align_pos, trace_matrix, score_matrix, seqA, seqB, alignments
                 maxpathscore=maxpathscore)
         end
         if 4 in trace
-            TraceBack(
+            traceback(
                 (a,b-1), trace_matrix, score_matrix, seqA, seqB, alignments, scores, positions,
                 thresh=thresh, dedup=dedup, 
                 current_alignment=(string("-", current_alignment[1]), string(seqB[b-1], current_alignment[2])),
