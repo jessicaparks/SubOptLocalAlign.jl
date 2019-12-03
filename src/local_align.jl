@@ -100,8 +100,10 @@ end
 
 
 """
-    deduplicate(align_pos::CartesianIndex{2}, trace_matrix::Array{Array{Int,1},2},
-        score_matrix::Array{Int,2}, thresh::Int, lenA::Int, lenB::Int)
+    deduplicate(align_pos::CartesianIndex{2},
+        trace_matrix::Array{Array{Int,1},2},
+        score_matrix::Array{Int,2},
+        thresh::Int, lenA::Int, lenB::Int)
   
 Identify whether the alignment end position has any parents in the trace matrix where a
 parent is a next alignment position that would contain this position in its alignment.
@@ -143,7 +145,8 @@ end
 """
     local_align(seqA::String, seqB::String,
         sub_header::Dict{Char,Int}, sub_matrix::Array{Float64,2})
-    local_align(; thresh::Union{Int,Bool}=false, gap_open::Int=-12, gap_extend::Int=-4,
+    local_align(; thresh::Union{Int,Bool}=false,
+        gap_open::Int=-12, gap_extend::Int=-4,
         dedup::Bool=true, dedup_method::String="score")
   
 Identify suboptimal alignments of SeqA and SeqB scoring above threshhold. Return the
