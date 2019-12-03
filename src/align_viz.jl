@@ -4,9 +4,9 @@
 # Visualizations for pairwise local alignments.
 
 
-using Plots
-using Plots.PlotMeasures
-using PlotlyJS
+import Plots
+import Plots.PlotMeasures
+import PlotlyJS
 
 
 """
