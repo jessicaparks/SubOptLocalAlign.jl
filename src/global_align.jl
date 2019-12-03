@@ -91,6 +91,6 @@ function global_align(seqA, seqB, sub_header, sub_matrix;
     end
     align_start = [i, j]
 
-    return (score_matrix, trace_matrix, [align_start, align_end, best_score, (alignA, alignB)])
+    return (score_matrix, trace_matrix, [align_start, [x-1 for x in align_end], best_score, (alignA, alignB)])
     
 end
