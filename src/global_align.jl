@@ -6,8 +6,8 @@
 
 
 """
-    global_align(seqA::AbstractString, seqB::AbstractString,
-        sub_header::Dict{Char,Int64}, sub_matrix::Array{Float64,2},
+    global_align(seqA::String, seqB::String,
+        sub_header::Dict{Char,Int}, sub_matrix::Array{Float,2},
         gap_open::Int=-12, gap_extend::Int=-4,
         end_gap_open::Int=0, end_gap_extend::Int=0)
   
@@ -21,8 +21,8 @@ very short overlap alignments if the sequences are very dissimilar.
   
 Only returns one best-scoring alignment, regardless of ties for best score.
 """
-function global_align(seqA::AbstractString, seqB::AbstractString,
-                      sub_header::Dict{Char,Int64}, sub_matrix::Array{Float64,2};
+function global_align(seqA::String, seqB::String,
+                      sub_header::Dict{Char,Int}, sub_matrix::Array{Float,2};
                       gap_open::Int=-12, gap_extend::Int=-4,
                       end_gap_open::Int=0, end_gap_extend::Int=0)
     

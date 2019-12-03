@@ -5,7 +5,7 @@
 
 
 """
-    align(fp1::AbstractString, fp2::AbstractString; <keyword arguments>)
+    align(fp1::String, fp2::String; <keyword arguments>)
   
 Identify local alignments between the sequence pair at filepaths `fp1` and `fp2`.  
   
@@ -15,15 +15,15 @@ the graph will be returned as a plot.
 
 ---
 ## Arguments:
-- `fp1::AbstractString`: fasta file containing sequence 1.
-- `fp2::AbstractString`: fasta file containing sequence 2.
+- `fp1::String`: fasta file containing sequence 1.
+- `fp2::String`: fasta file containing sequence 2.
 - `thresh::Union{Int,Bool}=false`: score threshold for the suboptimal local alignments;
     calculated if set to `false`.
-- `submatfp::Union{AbstractString,Bool}=false`: filepath for substitution matrix.
+- `submatfp::Union{String,Bool}=false`: filepath for substitution matrix.
 - `gap_open::Int=-12`: penalty for gap opening.
 - `gap_extend::Int=-4`: penalty for gap extension.
 - `dedup::Bool=true`: whether to deduplicate the local alignments.
-- `dedup_method::AbstractString="score"`: method of local alignment deduplication; for
+- `dedup_method::String="score"`: method of local alignment deduplication; for
     `score`, keeps all highest-scoring alignments along each unique path; for `length`,
     keeps only the longest alignment along each unique path.
 - `global_alignment::Bool=true`: whether to identify a global alignment.
@@ -33,17 +33,17 @@ the graph will be returned as a plot.
 - `global_end_gap_extend::Int=0`: penalty for end gap extension in the global alignment.
 - `print::Bool=true`: whether to print out a color-coded view of the local alignments.
 - `figure::Bool=true`: whether to return a graph of the alignments.
-- `figure_type::AbstractString="interactive"`: the type of the graph; `interactive` or
+- `figure_type::String="interactive"`: the type of the graph; `interactive` or
     `static`.
 - `figurewidth::Int=1000`: the figure width of the alignment graph.
 """
-function align(fp1::AbstractString, fp2::AbstractString;
-               thresh::Union{Int,Bool}=false, submatfp::Union{AbstractString,Bool}=false,
+function align(fp1::String, fp2::String;
+               thresh::Union{Int,Bool}=false, submatfp::Union{String,Bool}=false,
                gap_open::Int=-12, gap_extend::Int=-4,
-               dedup::Bool=true, dedup_method::AbstractString="score",
+               dedup::Bool=true, dedup_method::String="score",
                global_alignment::Bool=true, global_gap_open::Int=-12, global_gap_extend::Int=-4,
                global_end_gap_open::Int=0, global_end_gap_extend::Int=0,
-               print::Bool=true, figure::Bool=true, figure_type::AbstractString="interactive",
+               print::Bool=true, figure::Bool=true, figure_type::String="interactive",
                figurewidth::Int=1000)
 
     seqA_id, seqA = read_input(fp1)

@@ -4,6 +4,7 @@
 # Visualizations for pairwise local alignments.
 
 
+
 using PlotUtils
 using Plots.PlotMeasures
 using Plots
@@ -11,12 +12,12 @@ using PlotlyJS
 
 
 """
-    print_in_color(text::AbstractString, rgbcolor::RGB{Float64})
+    print_in_color(text::String, rgbcolor::RGB{Float64})
     print_in_color(; colorbkgd::Bool=true, colortext::Bool=false, bold::Bool=false)
   
 Print RGB-colored background or text.
 """
-function print_in_color(text::AbstractString, rgbcolor::RGB{Float64};
+function print_in_color(text::String, rgbcolor::RGB{Float64};
                         colorbkgd::Bool=true, colortext::Bool=false, bold::Bool=false)
     r = Int(round(red(rgbcolor)*255))
     g = Int(round(green(rgbcolor)*255))
@@ -30,24 +31,24 @@ end
 
 
 """
-    local_align_print(seqA_id::AbstractString, seqB_id::AbstractString,
-        alignments::Array{Array{Any,1},1}, sub_header::Dict{Char,Int64},
-        sub_matrix::Array{Float64,2})
+    local_align_print(seqA_id::String, seqB_id::String,
+        alignments::Array{Array{Any,1},1}, sub_header::Dict{Char,Int},
+        sub_matrix::Array{Float,2})
   
 Print the local alignments between two sequences in colored text.
 
 ---
 # Arguments:
-- `seqA_id::AbstractString`: identifier for first input sequence.
-- `seqB_id::AbstractString`: identifier for second input sequence.
+- `seqA_id::String`: identifier for first input sequence.
+- `seqB_id::String`: identifier for second input sequence.
 - `alignments::Array{Array{Any,1},1}`: array of alignments; containing `start coordinate`, `end coordinate`,
     `score`, and `alignment sequences` for each
-- `sub_header::Dict{Char,Int64}`: substitution matrix headers.
-- `sub_matrix::Array{Float64,2}`: substitution matrix.
+- `sub_header::Dict{Char,Int}`: substitution matrix headers.
+- `sub_matrix::Array{Float,2}`: substitution matrix.
 """
-function local_align_print(seqA_id::AbstractString, seqB_id::AbstractString,
-                           alignments::Array{Array{Any,1},1}, sub_header::Dict{Char,Int64},
-                           sub_matrix::Array{Float64,2})
+function local_align_print(seqA_id::String, seqB_id::String,
+                           alignments::Array{Array{Any,1},1}, sub_header::Dict{Char,Int},
+                           sub_matrix::Array{Float,2})
 
     # sort alignments by start position and then by score
     alignments = sort(sort(alignments, by=x->x[3], rev=true), by=x->x[1], rev=false)
@@ -90,10 +91,10 @@ end
 
 
 """
-    i_local_align_viz(seqA::AbstractString, seqB::AbstractString,
-        seqA_id::AbstractString, seqB_id::AbstractString,
+    i_local_align_viz(seqA::String, seqB::String,
+        seqA_id::String, seqB_id::String,
         alignments::Array{Array{Any,1},1},
-        sub_header::Dict{Char,Int64}, sub_matrix::Array{Float64,2};
+        sub_header::Dict{Char,Int}, sub_matrix::Array{Float,2};
         global_alignment::Union{Array{Any,1},Bool}=false,
         figurewidth::Int=1000)
   
@@ -101,23 +102,23 @@ Interactive visualization of the local alignments between two sequences.
 
 ---
 # Arguments:
-- `seqA::AbstractString`: first input sequence.
-- `seqB::AbstractString`: second input sequence.
-- `seqA_id::AbstractString`: identifier for first input sequence.
-- `seqB_id::AbstractString`: identifier for second input sequence.
+- `seqA::String`: first input sequence.
+- `seqB::String`: second input sequence.
+- `seqA_id::String`: identifier for first input sequence.
+- `seqB_id::String`: identifier for second input sequence.
 - `alignments::Array{Array{Any,1},1}`: array of possible alignments; containing
     `start coordinate`, `end coordinate`, `score`, and `alignment sequences` for each.
-- `sub_header::Dict{Char,Int64}`: substitution matrix headers.
-- `sub_matrix::Array{Float64,2}`: substitution matrix.
+- `sub_header::Dict{Char,Int}`: substitution matrix headers.
+- `sub_matrix::Array{Float,2}`: substitution matrix.
 - `global_alignment::Union{Array{Any,1},Bool}=false`: a global alignment to be included in
     the plot; if `false`, no global alignment included; otherwise, contains
     `start coordinate`, `end coordinate`, `score`, and `alignment sequences`.
 - `figurewidth::Int=1000`: width (in pixels) of the plot.
 """
-function i_local_align_viz(seqA::AbstractString, seqB::AbstractString,
-                           seqA_id::AbstractString, seqB_id::AbstractString,
-                           alignments::Array{Array{Any,1},1}, sub_header::Dict{Char,Int64},
-                           sub_matrix::Array{Float64,2};
+function i_local_align_viz(seqA::String, seqB::String,
+                           seqA_id::String, seqB_id::String,
+                           alignments::Array{Array{Any,1},1}, sub_header::Dict{Char,Int},
+                           sub_matrix::Array{Float,2};
                            global_alignment::Union{Array{Any,1},Bool}=false,
                            figurewidth::Int=1000)
 
@@ -190,10 +191,10 @@ end
 
 
 """
-    s_local_align_viz(seqA::AbstractString, seqB::AbstractString,
-        seqA_id::AbstractString, seqB_id::AbstractString,
+    s_local_align_viz(seqA::String, seqB::String,
+        seqA_id::String, seqB_id::String,
         alignments::Array{Array{Any,1},1},
-        sub_header::Dict{Char,Int64}, sub_matrix::Array{Float64,2};
+        sub_header::Dict{Char,Int}, sub_matrix::Array{Float,2};
         global_alignment::Union{Array{Any,1},Bool}=false,
         figurewidth::Int=1000)
   
@@ -201,23 +202,23 @@ Static visualization of the local alignments between two sequences.
   
 ---
 # Arguments:
-- `seqA::AbstractString`: first input sequence.
-- `seqB::AbstractString`: second input sequence.
-- `seqA_id::AbstractString`: identifier for first input sequence.
-- `seqB_id::AbstractString`: identifier for second input sequence.
+- `seqA::String`: first input sequence.
+- `seqB::String`: second input sequence.
+- `seqA_id::String`: identifier for first input sequence.
+- `seqB_id::String`: identifier for second input sequence.
 - `alignments::Array{Array{Any,1},1}`: array of possible alignments; containing
     `start coordinate`, `end coordinate`, `score`, and `alignment sequences` for each.
-- `sub_header::Dict{Char,Int64}`: substitution matrix headers.
-- `sub_matrix::Array{Float64,2}`: substitution matrix.
+- `sub_header::Dict{Char,Int}`: substitution matrix headers.
+- `sub_matrix::Array{Float,2}`: substitution matrix.
 - `global_alignment::Union{Array{Any,1},Bool}=false`: a global alignment to be included in
     the plot; if `false`, no global alignment included; otherwise, contains
     `start coordinate`, `end coordinate`, `score`, and `alignment sequences`.
 - `figurewidth::Int=1000`: width (in pixels) of the plot.
 """
-function s_local_align_viz(seqA::AbstractString, seqB::AbstractString,
-                           seqA_id::AbstractString, seqB_id::AbstractString,
-                           alignments::Array{Array{Any,1},1}, sub_header::Dict{Char,Int64},
-                           sub_matrix::Array{Float64,2};
+function s_local_align_viz(seqA::String, seqB::String,
+                           seqA_id::String, seqB_id::String,
+                           alignments::Array{Array{Any,1},1}, sub_header::Dict{Char,Int},
+                           sub_matrix::Array{Float,2};
                            global_alignment::Union{Array{Any,1},Bool}=false,
                            figurewidth::Int=1000)
 
