@@ -9,7 +9,7 @@ static and interactive graphs of the alignments.
 ## Installation
 
 Install from the Julia REPL or from Jupyter:
-```
+```julia
 using Pkg
 Pkg.add(PackageSpec(url="https://github.com/jessicaparks/SubOptLocalAlign.jl"))
 ```
