@@ -16,7 +16,8 @@ include("align_viz.jl")
 Identify local alignments between the sequence pair at filepaths `fp1` and `fp2`.  
   
 Optionally, visualize these alignments through a printout or graph; and optionally include
-a global alignment in this graph for comparison.
+a global alignment in this graph for comparison. The printout will print to the screen, and
+the graph will be returned as a plot.
 
 ---
 ## Arguments:
@@ -59,18 +60,26 @@ function align(fp1::AbstractString, fp2::AbstractString;
         sub_header, sub_matrix = BLOSUM62
     end
 
+    println('aligning $seqA_id and $seqB_id ...')
     sm, tm, am = local_align(seqA, seqB, sub_header, sub_matrix;
         thresh=thresh, gap_open=gap_open, gap_extend=gap_extend,
         dedup=dedup, dedup_method=dedup_method)
+    println(length(am), ' local alignments found.\n')
     
     if global_alignment
+        println('calculating global alignment ...')
         gsm, gtm, gam = global_align(seqA, seqB, sub_header, sub_matrix;
             gap_open=global_gap_open, gap_extend=global_gap_extend,
             end_gap_open=global_end_gap_open, end_gap_extend=global_end_gap_extend)
     end
     
     if print
+        println('\n\n', 'local alignments:', '\n')
         local_align_print(seqA_id, seqB_id, am, sub_header, sub_matrix)
+        if global_alignment
+            println('\n\n', 'global alignment:', '\n')
+            local_align_print(seqA_id, seqB_id, [gam], sub_header, sub_matrix)
+        end
     end
     
     if figure
