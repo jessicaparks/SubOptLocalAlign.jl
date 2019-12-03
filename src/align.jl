@@ -60,24 +60,24 @@ function align(fp1::AbstractString, fp2::AbstractString;
         sub_header, sub_matrix = BLOSUM62
     end
 
-    println('aligning $seqA_id and $seqB_id ...')
+    println("aligning $seqA_id and $seqB_id ...")
     sm, tm, am = local_align(seqA, seqB, sub_header, sub_matrix;
         thresh=thresh, gap_open=gap_open, gap_extend=gap_extend,
         dedup=dedup, dedup_method=dedup_method)
-    println(length(am), ' local alignments found.\n')
+    println(length(am), " local alignments found.\n")
     
     if global_alignment
-        println('calculating global alignment ...')
+        println("calculating global alignment ...")
         gsm, gtm, gam = global_align(seqA, seqB, sub_header, sub_matrix;
             gap_open=global_gap_open, gap_extend=global_gap_extend,
             end_gap_open=global_end_gap_open, end_gap_extend=global_end_gap_extend)
     end
     
     if print
-        println('\n\n', 'local alignments:', '\n')
+        println("\n\n", "local alignments:", "\n")
         local_align_print(seqA_id, seqB_id, am, sub_header, sub_matrix)
         if global_alignment
-            println('\n\n', 'global alignment:', '\n')
+            println("\n\n", "global alignment:", "\n")
             local_align_print(seqA_id, seqB_id, [gam], sub_header, sub_matrix)
         end
     end
