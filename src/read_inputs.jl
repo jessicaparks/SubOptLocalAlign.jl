@@ -6,6 +6,7 @@
 
 using DelimitedFiles
 using FastaIO
+include("data/BLOSUM62")
 
 
 """
