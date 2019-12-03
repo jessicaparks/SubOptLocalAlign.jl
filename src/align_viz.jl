@@ -4,7 +4,8 @@
 # Visualizations for pairwise local alignments.
 
 
-using Plots.ColorGradient
+using PlotUtils.ColorGradient,
+      PlotUtils.cgrad
 using Plots.PlotMeasures
 using Plots.plot
 using PlotlyJS.Layout
@@ -48,8 +49,8 @@ function local_align_print(seqA_id, seqB_id, alignments, sub_header, sub_matrix)
     alignments = sort(sort(alignments, by=x->x[3], rev=true), by=x->x[1], rev=false)
 
     # colors to use in print-out
-    C(g::Plots.ColorGradient) = RGB[g[i] for i in 3:28]
-    colors = reverse(cgrad(:curl) |> C)
+    C(g::PlotUtils.ColorGradient) = RGB[g[i] for i in 3:28]
+    colors = reverse(PlotUtils.cgrad(:curl) |> C)
 
     # lengths of id spacings
     idlength = max(length(seqA_id), length(seqB_id)) + 3
@@ -108,8 +109,8 @@ plot
 function i_local_align_viz(seqA, seqB, seqA_id, seqB_id, alignments, sub_header, sub_matrix;
                            global_alignment=false, figurewidth=1000)
     # colors to use in figure
-    C(g::Plots.ColorGradient) = RGB[g[i] for i in 3:28]
-    colors = reverse(cgrad(:curl) |> C)
+    C(g::PlotUtils.ColorGradient) = RGB[g[i] for i in 3:28]
+    colors = reverse(PlotUtils.cgrad(:curl) |> C)
     
     # figure layout
     layout = PlotlyJS.Layout(xaxis_range=[0.5, length(seqA)+0.5],
@@ -199,8 +200,8 @@ plot
 function s_local_align_viz(seqA, seqB, seqA_id, seqB_id, alignments, sub_header, sub_matrix;
                            global_alignment=false, figurewidth=1000)
     # colors to use in figure
-    C(g::ColorGradient) = RGB[g[i] for i in 3:28]
-    colors = reverse(cgrad(:curl) |> C)
+    C(g::PlotUtils.ColorGradient) = RGB[g[i] for i in 3:28]
+    colors = reverse(PlotUtils.cgrad(:curl) |> C)
     
     # figure layout
     if length(seqA)<50
