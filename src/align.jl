@@ -51,35 +51,35 @@ function align(fp1::AbstractString, fp2::AbstractString;
                print::Bool=true, figure::Bool=true, figure_type::AbstractString="interactive",
                figurewidth::Int=1000)
 
-    seqA_id, seqA = ReadInput(fp1)
-    seqB_id, seqB = ReadInput(fp2)
+    seqA_id, seqA = read_input(fp1)
+    seqB_id, seqB = read_input(fp2)
     if submatfp!=false
-        sub_header, sub_matrix = ReadSubMatrix(fp=submatfp)
+        sub_header, sub_matrix = read_sub_matrix(fp=submatfp)
     else
         sub_header, sub_matrix = BLOSUM62
     end
 
-    sm, tm, am = LocalAlign(seqA, seqB, sub_header, sub_matrix;
+    sm, tm, am = local_align(seqA, seqB, sub_header, sub_matrix;
         thresh=thresh, gap_open=gap_open, gap_extend=gap_extend,
         dedup=dedup, dedup_method=dedup_method)
     
     if global_align
-        gsm, gtm, gam = GlobalAlign(seqA, seqB, sub_header, sub_matrix;
+        gsm, gtm, gam = global_align(seqA, seqB, sub_header, sub_matrix;
             gap_open=global_gap_open, gap_extend=global_gap_extend,
             end_gap_open=global_end_gap_open, end_gap_extend=global_end_gap_extend)
     end
     
     if print
-        LocalAlignPrint(seqA_id, seqB_id, am2, sub_header, sub_matrix)
+        local_align_print(seqA_id, seqB_id, am2, sub_header, sub_matrix)
     end
     
     if figure
         if figure_type=="interactive"
-            plt = iLocalAlignViz(seqA, seqB, seqA_id, seqB_id, am, sub_header, sub_matrix;
+            plt = i_local_align_viz(seqA, seqB, seqA_id, seqB_id, am, sub_header, sub_matrix;
                 figurewidth=figurewidth, global_alignment=gam)
         end
         if figure_type=="static"
-            plt = sLocalAlignViz(seqA, seqB, seqA_id, seqB_id, am, sub_header, sub_matrix;
+            plt = s_local_align_viz(seqA, seqB, seqA_id, seqB_id, am, sub_header, sub_matrix;
                 figurewidth=figurewidth, global_alignment=gam)
         end
         return plt

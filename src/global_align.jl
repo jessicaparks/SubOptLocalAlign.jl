@@ -6,7 +6,7 @@
 
 
 """
-GlobalAlign(seqA, seqB, sub_header, sub_matrix, gap_open, gap_extend, end_gap_open, end_gap_extend)
+global_align(seqA, seqB, sub_header, sub_matrix, gap_open, gap_extend, end_gap_open, end_gap_extend)
 global pairwise alignment of the two input sequences
 
 Defaults to semi-global alignment, with no penalties for end gaps.
@@ -29,8 +29,8 @@ score matrix
 traceback matrix
 (start position, end position, score, alignment) list for the alignment
 """
-function GlobalAlign(seqA, seqB, sub_header, sub_matrix;
-                     gap_open=-12, gap_extend=-4, end_gap_open=0, end_gap_extend=0)
+function global_align(seqA, seqB, sub_header, sub_matrix;
+                      gap_open=-12, gap_extend=-4, end_gap_open=0, end_gap_extend=0)
     
     m = length(seqA) + 1
     n = length(seqB) + 1

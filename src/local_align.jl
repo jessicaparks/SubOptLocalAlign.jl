@@ -6,7 +6,7 @@
 
 
 """
-TraceBack(align_pos, trace_matrix, score_matrix, seqA, seqB, alignments, scores, positions,
+traceback(align_pos, trace_matrix, score_matrix, seqA, seqB, alignments, scores, positions,
           thresh, dedup, current_alignment, current_scores, current_positions, maxpathscore)
 traceback to identify alignments
 
@@ -26,7 +26,7 @@ current_positions: coordinates of each position in the current alignment
 Returns:
 pushes updates to the alignments, scores, and positions arrays
 """
-function TraceBack(align_pos, trace_matrix, score_matrix, seqA, seqB, alignments, scores, positions;
+function traceback(align_pos, trace_matrix, score_matrix, seqA, seqB, alignments, scores, positions;
                    thresh=0, dedup=true,
                    current_alignment=("",""), current_scores=[], current_positions=[], maxpathscore=false)
     (a, b) = Tuple(align_pos)
@@ -77,7 +77,7 @@ end
 
 
 """
-DeDup(align_pos, trace_matrix, score_matrix, thresh, lenA, lenB)
+dedup(align_pos, trace_matrix, score_matrix, thresh, lenA, lenB)
 identify whether the alignment end position has any parents in the trace matrix
 where a parent is a next alignment position that would contain this position in its alignment
 
@@ -92,7 +92,7 @@ lenB: length of seqB + 1 (the max size of the alignment in the b direction)
 Returns:
 (bool): true if the alignment position is contained within a parent alignment, false if not;
 """
-function DeDup(align_pos, trace_matrix, score_matrix, thresh, lenA, lenB)
+function dedup(align_pos, trace_matrix, score_matrix, thresh, lenA, lenB)
     (a, b) = Tuple(align_pos)
     if a==lenA && b==lenB
         return false
@@ -116,7 +116,7 @@ end
 
 
 """
-LocalAlign(seqA, seqB, sub_header, sub_matrix, thresh, gap_open, gap_extend, dedup, dedup_method)
+local_align(seqA, seqB, sub_header, sub_matrix, thresh, gap_open, gap_extend, dedup, dedup_method)
 identify all suboptimal alignments of SeqA and SeqB scoring above threshhold
 
 Arguments:
@@ -135,7 +135,7 @@ score matrix
 traceback matrix
 (start position, end position, score, alignment) list for all suboptimal alignments
 """
-function LocalAlign(seqA, seqB, sub_header, sub_matrix;
+function local_align(seqA, seqB, sub_header, sub_matrix;
                     thresh=false, gap_open=-12, gap_extend=-4, dedup=true, dedup_method="score")
     
     # instantiate scoring matrix and trace matrix
@@ -166,14 +166,14 @@ function LocalAlign(seqA, seqB, sub_header, sub_matrix;
     if dedup
         align_ends = [
             pos for pos in align_ends 
-                if !DeDup(pos, trace_matrix, score_matrix, thresh, length(seqA)+1, length(seqB)+1)]
+                if !dedup(pos, trace_matrix, score_matrix, thresh, length(seqA)+1, length(seqB)+1)]
     end
     all_alignments = []
     for align_pos in align_ends
         alignments = []
         pos_scores = []
         positions = []
-        TraceBack(align_pos, trace_matrix, score_matrix, seqA, seqB, alignments, pos_scores, positions,
+        traceback(align_pos, trace_matrix, score_matrix, seqA, seqB, alignments, pos_scores, positions,
             thresh=thresh, dedup=dedup)
         # select highest-scoring alignment(s) for each alignment path, if de-duplicating by score
         if dedup && dedup_method == "score"

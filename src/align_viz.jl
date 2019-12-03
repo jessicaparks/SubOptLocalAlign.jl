@@ -10,10 +10,10 @@ using PlotlyJS
 
 
 """
-PrintInColor(text, rgbcolor, colorbkgd, colortext, bold)
+print_in_color(text, rgbcolor, colorbkgd, colortext, bold)
 prints RGB-colored background or text on a 0-255 scale
 """
-function PrintInColor(text, rgbcolor; colorbkgd=true, colortext=false, bold=false)
+function print_in_color(text, rgbcolor; colorbkgd=true, colortext=false, bold=false)
     r = Int(round(red(rgbcolor)*255))
     g = Int(round(green(rgbcolor)*255))
     b = Int(round(blue(rgbcolor)*255))
@@ -26,7 +26,7 @@ end
 
 
 """
-LocalAlignPrint(seqA_id, seqB_id, alignments, sub_header, sub_matrix)
+local_align_print(seqA_id, seqB_id, alignments, sub_header, sub_matrix)
 print out the local alignments between two sequences
 
 Arguments:
@@ -41,7 +41,7 @@ sub_matrix (matrix): substitution matrix
 Returns:
 print-out of alignment number, start and end coordinates, score, and aligned sequences
 """
-function LocalAlignPrint(seqA_id, seqB_id, alignments, sub_header, sub_matrix)
+function local_align_print(seqA_id, seqB_id, alignments, sub_header, sub_matrix)
     # sort alignments by start position and then by score
     alignments = sort(sort(alignments, by=x->x[3], rev=true), by=x->x[1], rev=false)
 
@@ -70,11 +70,11 @@ function LocalAlignPrint(seqA_id, seqB_id, alignments, sub_header, sub_matrix)
         for i in 1:80-idlength:alength
             printstyled(seqA_id, seqA_spaces)
             for j in i:min(i+80-idlength, alength)
-                PrintInColor(string(a[1][j]), c[j])
+                print_in_color(string(a[1][j]), c[j])
             end
             printstyled("\n", seqB_id, seqB_spaces)
             for j in i:min(i+80-idlength, alength)
-                PrintInColor(string(a[2][j]), c[j])
+                print_in_color(string(a[2][j]), c[j])
             end
             print("\n\n")
         end
@@ -83,7 +83,7 @@ end
 
 
 """
-iLocalAlignViz(seqA, seqB, seqA_id, seqB_id, alignments, sub_header, sub_matrix, global_alignment, figurewidth)
+i_local_align_viz(seqA, seqB, seqA_id, seqB_id, alignments, sub_header, sub_matrix, global_alignment, figurewidth)
 interactive visualization of the local alignments between two sequences
 
 Arguments:
@@ -103,8 +103,8 @@ figurewidth: width of the plot, in pixels, default=1000
 Returns:
 plot
 """
-function iLocalAlignViz(seqA, seqB, seqA_id, seqB_id, alignments, sub_header, sub_matrix;
-                        global_alignment=false, figurewidth=1000)
+function i_local_align_viz(seqA, seqB, seqA_id, seqB_id, alignments, sub_header, sub_matrix;
+                           global_alignment=false, figurewidth=1000)
     # colors to use in figure
     C(g::Plots.ColorGradient) = RGB[g[i] for i in 3:28]
     colors = reverse(cgrad(:curl) |> C)
@@ -174,7 +174,7 @@ end
 
 
 """
-sLocalAlignViz(seqA, seqB, seqA_id, seqB_id, alignments, sub_header, sub_matrix, global_alignment, figurewidth)
+s_local_align_viz(seqA, seqB, seqA_id, seqB_id, alignments, sub_header, sub_matrix, global_alignment, figurewidth)
 static visualization of the local alignments between two sequences
 
 Arguments:
@@ -194,8 +194,8 @@ figurewidth: width of the plot, in pixels, default=1000
 Returns:
 plot
 """
-function sLocalAlignViz(seqA, seqB, seqA_id, seqB_id, alignments, sub_header, sub_matrix;
-                        global_alignment=false, figurewidth=1000)
+function s_local_align_viz(seqA, seqB, seqA_id, seqB_id, alignments, sub_header, sub_matrix;
+                           global_alignment=false, figurewidth=1000)
     # colors to use in figure
     C(g::ColorGradient) = RGB[g[i] for i in 3:28]
     colors = reverse(cgrad(:curl) |> C)
