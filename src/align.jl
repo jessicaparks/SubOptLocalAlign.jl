@@ -12,7 +12,7 @@ include("align_viz.jl")
 
 """
     align(fp1::AbstractString, fp2::AbstractString)
-    align(; thresh::Union{Int,Bool}=false, submatfp::AbstractString="data/BLOSUM62",
+    align(; thresh::Union{Int,Bool}=false, submatfp::Union{AbstractString,Bool}=false,
           gap_open::Int=-12, gap_extend::Int=-4, dedup::Bool=true,
           dedup_method::AbstractString="score", global_align::Bool=true,
           global_gap_open::Int=-12, global_gap_extend::Int=-4, global_end_gap_open::Int=0,
@@ -30,7 +30,7 @@ a global alignment in this graph for comparison.
 - `fp2::AbstractString`: fasta file containing sequence 2.
 - `thresh::Union{Int,Bool}=false`: score threshold for the suboptimal local alignments;
     calculated if set to `false`.
-- `submatfp::AbstractString="data/BLOSUM62"`: filepath for substitution matrix.
+- `submatfp::Union{AbstractString,Bool}=false`: filepath for substitution matrix.
 - `gap_open::Int=-12`: penalty for gap opening.
 - `gap_extend::Int=-4`: penalty for gap extension.
 - `dedup::Bool=true`: whether to deduplicate the local alignments.
@@ -49,7 +49,7 @@ a global alignment in this graph for comparison.
 - `figurewidth::Int=1000`: the figure width of the alignment graph.
 """
 function align(fp1::AbstractString, fp2::AbstractString;
-               thresh::Union{Int,Bool}=false, submatfp="data/BLOSUM62",
+               thresh::Union{Int,Bool}=false, submatfp::Union{AbstractString,Bool}=false,
                gap_open::Int=-12, gap_extend::Int=-4,
                dedup::Bool=true, dedup_method::AbstractString="score",
                global_align::Bool=true, global_gap_open::Int=-12, global_gap_extend::Int=-4,
@@ -59,7 +59,11 @@ function align(fp1::AbstractString, fp2::AbstractString;
 
     seqA_id, seqA = ReadInput(fp1)
     seqB_id, seqB = ReadInput(fp2)
-    sub_header, sub_matrix = ReadSubMatrix(fp=submatfp)
+    if submatfp!=false
+        sub_header, sub_matrix = ReadSubMatrix(fp=submatfp)
+    else
+        sub_header, sub_matrix = BLOSUM62
+    end
 
     sm, tm, am = LocalAlign(seqA, seqB, sub_header, sub_matrix;
         thresh=thresh, gap_open=gap_open, gap_extend=gap_extend,
