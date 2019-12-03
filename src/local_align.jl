@@ -127,17 +127,17 @@ function deduplicate(align_pos::CartesianIndex{2}, trace_matrix::Array{Array{Int
         return false
     elseif a==lenA
         return ((4 in trace_matrix[a,b+1]) && ((score_matrix[a,b+1]>=thresh) || 
-                                              DeDup((a,b+1), trace_matrix, score_matrix, thresh, lenA, lenB)))
+                                              deduplicate((a,b+1), trace_matrix, score_matrix, thresh, lenA, lenB)))
     elseif b==lenB
         return ((3 in trace_matrix[a+1,b]) && ((score_matrix[a+1,b]>=thresh) || 
-                                              DeDup((a+1,b), trace_matrix, score_matrix, thresh, lenA, lenB)))
+                                              deduplicate((a+1,b), trace_matrix, score_matrix, thresh, lenA, lenB)))
     else
         return (((2 in trace_matrix[a+1,b+1]) && ((score_matrix[a+1,b+1]>=thresh) || 
-                                              DeDup((a+1,b+1), trace_matrix, score_matrix, thresh, lenA, lenB))) ||
+                                              deduplicate((a+1,b+1), trace_matrix, score_matrix, thresh, lenA, lenB))) ||
                 ((3 in trace_matrix[a+1,b]) && ((score_matrix[a+1,b]>=thresh) || 
-                                              DeDup((a+1,b), trace_matrix, score_matrix, thresh, lenA, lenB))) ||
+                                              deduplicate((a+1,b), trace_matrix, score_matrix, thresh, lenA, lenB))) ||
                 ((4 in trace_matrix[a,b+1]) && ((score_matrix[a,b+1]>=thresh) || 
-                                              DeDup((a,b+1), trace_matrix, score_matrix, thresh, lenA, lenB))))
+                                              deduplicate((a,b+1), trace_matrix, score_matrix, thresh, lenA, lenB))))
     end
 end
 
