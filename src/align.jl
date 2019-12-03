@@ -4,12 +4,6 @@
 # Interface function for alignments.
 
 
-include("read_inputs.jl")
-include("local_align.jl")
-include("global_align.jl")
-include("align_viz.jl")
-
-
 """
     align(fp1::AbstractString, fp2::AbstractString; <keyword arguments>)
   
