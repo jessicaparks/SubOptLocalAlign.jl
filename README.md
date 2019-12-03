@@ -11,5 +11,10 @@ static and interactive graphs of the alignments.
 Install from the Julia REPL or from Jupyter:
 ```
 using Pkg
-Pkg.add("https://github.com/jessicaparks/SubOptLocalAlign.jl")
+Pkg.add(PackageSpec(url="https://github.com/jessicaparks/SubOptLocalAlign.jl"))
 ```
+
+## Usage
+
+The main method of SubOptLocalAlign is `align`. Other methods can be used in cases where only
+subsets of the functionality are needed. See function documentation for description and arguments.
