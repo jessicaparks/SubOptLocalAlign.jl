@@ -4,6 +4,8 @@
 # Functions to read fasta file and substitution matrix inputs for alignments.
 
 
+using FastaIO
+
 
 """
     read_input(fp::AbstractString)
