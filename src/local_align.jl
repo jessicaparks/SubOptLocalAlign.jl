@@ -170,7 +170,7 @@ function local_align(seqA::String, seqB::String,
     
     # instantiate scoring matrix and trace matrix
     score_matrix = fill(0,(length(seqA)+1,length(seqB)+1))
-    trace_matrix = fill([],(length(seqA)+1,length(seqB)+1))
+    trace_matrix = fill(Array{Int,1}(),(length(seqA)+1,length(seqB)+1))
     
     # fill scoring matrix
     for i in 2:length(seqA)+1
