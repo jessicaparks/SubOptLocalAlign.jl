@@ -6,10 +6,10 @@
 
 using PlotUtils
 using Plots.PlotMeasures
-import Plots.plot
-using PlotlyJS.Layout
-using PlotlyJS.scatter
-using PlotlyJS.plot
+import Plots.plot;
+import PlotlyJS.Layout
+import PlotlyJS.scatter
+import PlotlyJS.plot
 
 """
 print_in_color(text, rgbcolor, colorbkgd, colortext, bold)
