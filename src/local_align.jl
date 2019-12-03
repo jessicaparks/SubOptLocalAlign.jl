@@ -200,9 +200,9 @@ function local_align(seqA::String, seqB::String,
     end
     all_alignments = []
     for align_pos in align_ends
-        alignments = []
-        pos_scores = []
-        positions = []
+        alignments = Array{Tuple{String,String},1}()
+        pos_scores = Array{Array{Int,1},1}()
+        positions = Array{Array{Tuple{Int,Int},1},1}()
         traceback(align_pos, trace_matrix, score_matrix, seqA, seqB, alignments, pos_scores, positions,
             thresh=thresh, dedup=dedup)
         # select highest-scoring alignment(s) for each alignment path, if de-duplicating by score
