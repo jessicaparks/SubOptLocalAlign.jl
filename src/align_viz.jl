@@ -6,7 +6,7 @@
 
 using PlotUtils
 using Plots.PlotMeasures
-using Plots.plot
+import Plots.plot
 using PlotlyJS.Layout
 using PlotlyJS.scatter
 using PlotlyJS.plot
