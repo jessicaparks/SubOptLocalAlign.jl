@@ -11,20 +11,14 @@ include("align_viz.jl")
 
 
 """
-    align(fp1::AbstractString, fp2::AbstractString)
-    align(; thresh::Union{Int,Bool}=false, submatfp::Union{AbstractString,Bool}=false,
-          gap_open::Int=-12, gap_extend::Int=-4, dedup::Bool=true,
-          dedup_method::AbstractString="score", global_align::Bool=true,
-          global_gap_open::Int=-12, global_gap_extend::Int=-4, global_end_gap_open::Int=0,
-          global_end_gap_extend::Int=0, print::Bool=true, figure::Bool=true,
-          figure_type::AbstractString="interactive", figurewidth::Int=1000)
-
-Identify local alignments between sequence pair at filepaths `fp1` and `fp2`.  
+    align(fp1::AbstractString, fp2::AbstractString; <keyword arguments>)
+  
+Identify local alignments between the sequence pair at filepaths `fp1` and `fp2`.  
   
 Optionally, visualize these alignments through a printout or graph; and optionally include
 a global alignment in this graph for comparison.
 
-...
+---
 ## Arguments:
 - `fp1::AbstractString`: fasta file containing sequence 1.
 - `fp2::AbstractString`: fasta file containing sequence 2.
