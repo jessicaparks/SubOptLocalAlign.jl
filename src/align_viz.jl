@@ -31,7 +31,7 @@ end
 
 
 """
-    local_align_print(seqA_id::String, seqB_id::String,
+    local_align_print(seqA_id::AbstractString, seqB_id::AbstractString,
         alignments::Array{Array{Any,1},1}, sub_header::Dict{Char,Int},
         sub_matrix::Array{Float64,2})
   
@@ -39,8 +39,8 @@ Print the local alignments between two sequences in colored text.
 
 ---
 # Arguments:
-- `seqA_id::String`: identifier for first input sequence.
-- `seqB_id::String`: identifier for second input sequence.
+- `seqA_id::AbstractString`: identifier for first input sequence.
+- `seqB_id::AbstractString`: identifier for second input sequence.
 - `alignments::Array{Array{Any,1},1}`: array of alignments; containing `start coordinate`, `end coordinate`,
     `score`, and `alignment sequences` for each
 - `sub_header::Dict{Char,Int}`: substitution matrix headers.
