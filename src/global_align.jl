@@ -6,31 +6,25 @@
 
 
 """
-global_align(seqA, seqB, sub_header, sub_matrix, gap_open, gap_extend, end_gap_open, end_gap_extend)
-global pairwise alignment of the two input sequences
-
-Defaults to semi-global alignment, with no penalties for end gaps.
-Note, this does not penalize for gaps on any sequence end, which results in
-very short overlap alignments if the sequences are very dissimilar.
+    global_align(seqA::AbstractString, seqB::AbstractString,
+        sub_header::Dict{Char,Int64}, sub_matrix::Array{Float64,2},
+        gap_open::Int=-12, gap_extend::Int=-4,
+        end_gap_open::Int=0, end_gap_extend::Int=0)
+  
+Global pairwise alignment of the two input sequences. Return `score matrix`, 
+`traceback matrix`, and array of `start position`, `end position`, `score`, 
+and `alignment sequences`.  
+  
+Defaults to semi-global alignment, with no penalties for end gaps. 
+Note, this does not penalize for gaps on any sequence end, which results in 
+very short overlap alignments if the sequences are very dissimilar.  
+  
 Only returns one best-scoring alignment, regardless of ties for best score.
-
-Arguments:
-seqA: first input sequence
-seqB: second input sequence
-sub_header (list): substitution matrix headers
-sub_matrix (matrix): substitution matrix
-gap_open (int): contribution to alignment score for each gap opening, default = -12
-gap_extend (int): contribution to alignment score for each gap extension, default = -4
-end_gap_open (int): contribution to alignment score for each end gap opening, default = 0
-end_gap_extend (int): contribution to alignment score for each end gap extension, default = 0
-
-Returns:
-score matrix
-traceback matrix
-(start position, end position, score, alignment) list for the alignment
 """
-function global_align(seqA, seqB, sub_header, sub_matrix;
-                      gap_open=-12, gap_extend=-4, end_gap_open=0, end_gap_extend=0)
+function global_align(seqA::AbstractString, seqB::AbstractString,
+                      sub_header::Dict{Char,Int64}, sub_matrix::Array{Float64,2};
+                      gap_open::Int=-12, gap_extend::Int=-4,
+                      end_gap_open::Int=0, end_gap_extend::Int=0)
     
     m = length(seqA) + 1
     n = length(seqB) + 1
