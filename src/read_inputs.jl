@@ -25,8 +25,8 @@ end
 """
     read_sub_matrix(fp::AbstractString)
 
-Read substitution matrix header and data from file at path `fp`. Return an array of the
-headers and a matrix of the substitution scores.  
+Read substitution matrix header and data from file at path `fp`. Return a dictionary of the
+headers with their matrix position and a matrix of the substitution scores.  
   
 The input file should be formatted with the headers on the first line but not in the first
 column and use space-delimitation.
