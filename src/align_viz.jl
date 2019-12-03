@@ -4,7 +4,6 @@
 # Visualizations for pairwise local alignments.
 
 
-
 """
 PrintInColor(text, rgbcolor, colorbkgd, colortext, bold)
 prints RGB-colored background or text on a 0-255 scale
@@ -42,7 +41,7 @@ function LocalAlignPrint(seqA_id, seqB_id, alignments, sub_header, sub_matrix)
     alignments = sort(sort(alignments, by=x->x[3], rev=true), by=x->x[1], rev=false)
 
     # colors to use in print-out
-    C(g::ColorGradient) = RGB[g[i] for i in 3:28]
+    C(g::Plots.ColorGradient) = RGB[g[i] for i in 3:28]
     colors = reverse(cgrad(:curl) |> C)
 
     # lengths of id spacings
@@ -102,7 +101,7 @@ plot
 function iLocalAlignViz(seqA, seqB, seqA_id, seqB_id, alignments, sub_header, sub_matrix;
                         global_alignment=false, figurewidth=1000)
     # colors to use in figure
-    C(g::ColorGradient) = RGB[g[i] for i in 3:28]
+    C(g::Plots.ColorGradient) = RGB[g[i] for i in 3:28]
     colors = reverse(cgrad(:curl) |> C)
     
     # figure layout
