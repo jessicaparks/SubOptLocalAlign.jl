@@ -46,7 +46,7 @@ Print the local alignments between two sequences in colored text.
 - `sub_header::Dict{Char,Int}`: substitution matrix headers.
 - `sub_matrix::Array{Float64,2}`: substitution matrix.
 """
-function local_align_print(seqA_id::String, seqB_id::String,
+function local_align_print(seqA_id::AbstractString, seqB_id::AbstractString,
                            alignments::Array{Array{Any,1},1},
                            sub_header::Dict{Char,Int}, sub_matrix::Array{Float64,2})
 
