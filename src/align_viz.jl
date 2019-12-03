@@ -4,8 +4,7 @@
 # Visualizations for pairwise local alignments.
 
 
-using PlotUtils.ColorGradient,
-      PlotUtils.cgrad
+using PlotUtils
 using Plots.PlotMeasures
 using Plots.plot
 using PlotlyJS.Layout
