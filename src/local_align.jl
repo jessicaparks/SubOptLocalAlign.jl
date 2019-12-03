@@ -141,7 +141,7 @@ end
 
 """
     local_align(seqA::String, seqB::String,
-        sub_header::Dict{Char,Int}, sub_matrix::Array{Int,2})
+        sub_header::Dict{Char,Int}, sub_matrix::Array{Float64,2})
     local_align(; thresh::Union{Int,Bool}=false, gap_open::Int=-12, gap_extend::Int=-4,
         dedup::Bool=true, dedup_method::String="score")
   
@@ -154,7 +154,7 @@ Identify suboptimal alignments of SeqA and SeqB scoring above threshhold. Return
 - `seqA::String`: first input sequence.
 - `seqB::String`: second input sequence.
 - `sub_header::Dict{Char,Int}`: substitution matrix headers.
-- `sub_matrix::Array{Int,2}`: substitution matrix.
+- `sub_matrix::Array{Float64,2}`: substitution matrix.
 - `thresh::Union{Int,Bool}=false`: threshold for the alignment score, `false` triggers an
     automatically-set threshold.
 - `gap_open::Int=-12`: penalty for gap opening.
@@ -164,7 +164,7 @@ Identify suboptimal alignments of SeqA and SeqB scoring above threshhold. Return
     alignment ("length" or "score").
 """
 function local_align(seqA::String, seqB::String,
-                     sub_header::Dict{Char,Int}, sub_matrix::Array{Int,2};
+                     sub_header::Dict{Char,Int}, sub_matrix::Array{Float64,2};
                      thresh::Union{Int,Bool}=false, gap_open::Int=-12, gap_extend::Int=-4,
                      dedup::Bool=true, dedup_method::String="score")
     

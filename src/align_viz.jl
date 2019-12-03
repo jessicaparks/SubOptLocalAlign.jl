@@ -33,7 +33,7 @@ end
 """
     local_align_print(seqA_id::String, seqB_id::String,
         alignments::Array{Array{Any,1},1}, sub_header::Dict{Char,Int},
-        sub_matrix::Array{Int,2})
+        sub_matrix::Array{Float64,2})
   
 Print the local alignments between two sequences in colored text.
 
@@ -44,11 +44,11 @@ Print the local alignments between two sequences in colored text.
 - `alignments::Array{Array{Any,1},1}`: array of alignments; containing `start coordinate`, `end coordinate`,
     `score`, and `alignment sequences` for each
 - `sub_header::Dict{Char,Int}`: substitution matrix headers.
-- `sub_matrix::Array{Int,2}`: substitution matrix.
+- `sub_matrix::Array{Float64,2}`: substitution matrix.
 """
 function local_align_print(seqA_id::String, seqB_id::String,
                            alignments::Array{Array{Any,1},1},
-                           sub_header::Dict{Char,Int}, sub_matrix::Array{Int,2})
+                           sub_header::Dict{Char,Int}, sub_matrix::Array{Float64,2})
 
     # sort alignments by start position and then by score
     alignments = sort(sort(alignments, by=x->x[3], rev=true), by=x->x[1], rev=false)
@@ -94,7 +94,7 @@ end
     i_local_align_viz(seqA::String, seqB::String,
         seqA_id::String, seqB_id::String,
         alignments::Array{Array{Any,1},1},
-        sub_header::Dict{Char,Int}, sub_matrix::Array{Int,2};
+        sub_header::Dict{Char,Int}, sub_matrix::Array{Float64,2};
         global_alignment::Union{Array{Any,1},Bool}=false,
         figurewidth::Int=1000)
   
@@ -109,7 +109,7 @@ Interactive visualization of the local alignments between two sequences.
 - `alignments::Array{Array{Any,1},1}`: array of possible alignments; containing
     `start coordinate`, `end coordinate`, `score`, and `alignment sequences` for each.
 - `sub_header::Dict{Char,Int}`: substitution matrix headers.
-- `sub_matrix::Array{Int,2}`: substitution matrix.
+- `sub_matrix::Array{Float64,2}`: substitution matrix.
 - `global_alignment::Union{Array{Any,1},Bool}=false`: a global alignment to be included in
     the plot; if `false`, no global alignment included; otherwise, contains
     `start coordinate`, `end coordinate`, `score`, and `alignment sequences`.
@@ -118,7 +118,7 @@ Interactive visualization of the local alignments between two sequences.
 function i_local_align_viz(seqA::String, seqB::String,
                            seqA_id::String, seqB_id::String,
                            alignments::Array{Array{Any,1},1},
-                           sub_header::Dict{Char,Int}, sub_matrix::Array{Int,2};
+                           sub_header::Dict{Char,Int}, sub_matrix::Array{Float64,2};
                            global_alignment::Union{Array{Any,1},Bool}=false,
                            figurewidth::Int=1000)
 
@@ -194,7 +194,7 @@ end
     s_local_align_viz(seqA::String, seqB::String,
         seqA_id::String, seqB_id::String,
         alignments::Array{Array{Any,1},1},
-        sub_header::Dict{Char,Int}, sub_matrix::Array{Int,2};
+        sub_header::Dict{Char,Int}, sub_matrix::Array{Float64,2};
         global_alignment::Union{Array{Any,1},Bool}=false,
         figurewidth::Int=1000)
   
@@ -209,7 +209,7 @@ Static visualization of the local alignments between two sequences.
 - `alignments::Array{Array{Any,1},1}`: array of possible alignments; containing
     `start coordinate`, `end coordinate`, `score`, and `alignment sequences` for each.
 - `sub_header::Dict{Char,Int}`: substitution matrix headers.
-- `sub_matrix::Array{Int,2}`: substitution matrix.
+- `sub_matrix::Array{Float64,2}`: substitution matrix.
 - `global_alignment::Union{Array{Any,1},Bool}=false`: a global alignment to be included in
     the plot; if `false`, no global alignment included; otherwise, contains
     `start coordinate`, `end coordinate`, `score`, and `alignment sequences`.
@@ -218,7 +218,7 @@ Static visualization of the local alignments between two sequences.
 function s_local_align_viz(seqA::String, seqB::String,
                            seqA_id::String, seqB_id::String,
                            alignments::Array{Array{Any,1},1},
-                           sub_header::Dict{Char,Int}, sub_matrix::Array{Int,2};
+                           sub_header::Dict{Char,Int}, sub_matrix::Array{Float64,2};
                            global_alignment::Union{Array{Any,1},Bool}=false,
                            figurewidth::Int=1000)
 
