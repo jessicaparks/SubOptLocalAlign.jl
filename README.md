@@ -16,5 +16,13 @@ Pkg.add(PackageSpec(url="https://github.com/jessicaparks/SubOptLocalAlign.jl"))
 
 ## Usage
 
-The main method of SubOptLocalAlign is `align`. Other methods can be used in cases where only
-subsets of the functionality are needed. See function documentation for description and arguments.
+The main method of SubOptLocalAlign is `align`.
+
+```julia
+using SubOptLocalAlign
+
+plot = SubOptLocalAlign.align("seqA.fasta", "seqB.fasta");
+```
+
+Other methods can be used in cases where only subsets of the functionality are needed. See
+function documentation for description and arguments.
