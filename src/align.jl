@@ -10,8 +10,8 @@
 Identify local alignments between the sequence pair at filepaths `fp1` and `fp2`.  
   
 Optionally, visualize these alignments through a printout or graph; and optionally include
-a global alignment in this graph for comparison. The printout will print to the screen, and
-the graph will be returned as a plot.
+a global alignment and/or a custom user-entered alignment in this graph for comparison.
+The printout will print to the screen, and the graph will be returned as a plot.
 
 ---
 ## Arguments:
@@ -31,6 +31,8 @@ the graph will be returned as a plot.
 - `global_gap_extend::Int=-4`: penalty for gap extension in the global alignment.
 - `global_end_gap_open::Int=0`: penalty for end gap opening in the global alignment.
 - `global_end_gap_extend::Int=0`: penalty for end gap extension in the global alignment.
+- `custom_alignment::Union{Array{Any,1},Bool}=false`: custom alignment to include in the
+    output graph, entered by user.
 - `print::Bool=true`: whether to print out a color-coded view of the local alignments.
 - `figure::Bool=true`: whether to return a graph of the alignments.
 - `figure_type::String="interactive"`: the type of the graph; `interactive` or
@@ -43,6 +45,7 @@ function align(fp1::String, fp2::String;
                dedup::Bool=true, dedup_method::String="score",
                global_alignment::Bool=true, global_gap_open::Int=-12, global_gap_extend::Int=-4,
                global_end_gap_open::Int=0, global_end_gap_extend::Int=0,
+               custom_alignment::Union{Array{Any,1},Bool}=false,
                print::Bool=true, figure::Bool=true, figure_type::String="interactive",
                figurewidth::Int=1000)
 
@@ -79,11 +82,11 @@ function align(fp1::String, fp2::String;
     if figure
         if figure_type=="interactive"
             plt = i_local_align_viz(seqA, seqB, seqA_id, seqB_id, am, sub_header, sub_matrix;
-                figurewidth=figurewidth, global_alignment=gam)
+                figurewidth=figurewidth, global_alignment=gam, custom_alignment=custom_alignment)
         end
         if figure_type=="static"
             plt = s_local_align_viz(seqA, seqB, seqA_id, seqB_id, am, sub_header, sub_matrix;
-                figurewidth=figurewidth, global_alignment=gam)
+                figurewidth=figurewidth, global_alignment=gam, custom_alignment=custom_alignment)
         end
         return plt
     end

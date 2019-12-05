@@ -96,6 +96,7 @@ end
         alignments::Array{Array{Any,1},1},
         sub_header::Dict{Char,Int}, sub_matrix::Array{Float64,2};
         global_alignment::Union{Array{Any,1},Bool}=false,
+        custom_alignment::Union{Array{Any,1},Bool}=false,
         figurewidth::Int=1000)
   
 Interactive visualization of the local alignments between two sequences.
@@ -113,6 +114,9 @@ Interactive visualization of the local alignments between two sequences.
 - `global_alignment::Union{Array{Any,1},Bool}=false`: a global alignment to be included in
     the plot; if `false`, no global alignment included; otherwise, contains
     `start coordinate`, `end coordinate`, `score`, and `alignment sequences`.
+- `custom_alignment::Union{Array{Any,1},Bool}=false`: a custom alignment to be included in
+    the plot; if `false`, no custom alignment included; otherwise, contains
+    `start coordinate`, `end coordinate`, `score`, and `alignment sequences`.
 - `figurewidth::Int=1000`: width (in pixels) of the plot.
 """
 function i_local_align_viz(seqA::String, seqB::String,
@@ -120,6 +124,7 @@ function i_local_align_viz(seqA::String, seqB::String,
                            alignments::Array{Array{Any,1},1},
                            sub_header::Dict{Char,Int}, sub_matrix::Array{Float64,2};
                            global_alignment::Union{Array{Any,1},Bool}=false,
+                           custom_alignment::Union{Array{Any,1},Bool}=false,
                            figurewidth::Int=1000)
 
     # colors to use in figure
@@ -184,6 +189,17 @@ function i_local_align_viz(seqA::String, seqB::String,
         push!(traces, l_trace)
     end
 
+    if custom_alignment!=false
+        (a_start, a_end, a_score, a) = custom_alignment
+        # coordinates for trace
+        x = [a_start[1]+x-1 for x in cumsum([c != '-' for c in a[1]])]
+        y = [a_start[2]+x-1 for x in cumsum([c != '-' for c in a[2]])]
+        # line trace
+        l_trace = PlotlyJS.scatter(x=x, y=y, mode="lines", name="", line_color="blue", line_width=2,
+                                   opacity=0.75, hoverinfo="none")
+        push!(traces, l_trace)
+    end
+
     # create plot
     plt = PlotlyJS.plot([x for x in traces], layout)
     return plt
@@ -196,6 +212,7 @@ end
         alignments::Array{Array{Any,1},1},
         sub_header::Dict{Char,Int}, sub_matrix::Array{Float64,2};
         global_alignment::Union{Array{Any,1},Bool}=false,
+        custom_alignment::Union{Array{Any,1},Bool}=false,
         figurewidth::Int=1000)
   
 Static visualization of the local alignments between two sequences.
@@ -213,6 +230,9 @@ Static visualization of the local alignments between two sequences.
 - `global_alignment::Union{Array{Any,1},Bool}=false`: a global alignment to be included in
     the plot; if `false`, no global alignment included; otherwise, contains
     `start coordinate`, `end coordinate`, `score`, and `alignment sequences`.
+- `custom_alignment::Union{Array{Any,1},Bool}=false`: a custom alignment to be included in  
+    the plot; if `false`, no custom alignment included; otherwise, contains
+    `start coordinate`, `end coordinate`, `score`, and `alignment sequences`.
 - `figurewidth::Int=1000`: width (in pixels) of the plot.
 """
 function s_local_align_viz(seqA::String, seqB::String,
@@ -220,6 +240,7 @@ function s_local_align_viz(seqA::String, seqB::String,
                            alignments::Array{Array{Any,1},1},
                            sub_header::Dict{Char,Int}, sub_matrix::Array{Float64,2};
                            global_alignment::Union{Array{Any,1},Bool}=false,
+                           custom_alignment::Union{Array{Any,1},Bool}=false,
                            figurewidth::Int=1000)
 
     # colors to use in figure
@@ -273,6 +294,15 @@ function s_local_align_viz(seqA::String, seqB::String,
         # plot line
         Plots.plot!(plt, x, y, seriestype=:line,
                     alpha=0.75, linecolor="black", linewidth=2)
+    end
+    if custom_alignment!=false
+        (a_start, a_end, a_score, a) = custom_alignment
+        # coordinates for trace
+        x = [a_start[1]+x-1 for x in cumsum([c != '-' for c in a[1]])]
+        y = [a_start[2]+x-1 for x in cumsum([c != '-' for c in a[2]])]
+        # plot line
+        Plots.plot!(plt, x, y, seriestype=:line,
+                    alpha=0.75, linecolor="blue", linewidth=2)
     end
     return plt
 end
