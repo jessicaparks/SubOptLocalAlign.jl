@@ -233,8 +233,9 @@ function local_align(seqA::String, seqB::String,
         aligned_seqs = [x[4] for x in all_alignments]
         all_alignments = [
             all_alignments[i] for (i,x) in enumerate(aligned_seqs)
-            if !(sum([x==(k[1][1:min(length(x[1]),length(k[1]))], k[2][1:min(length(x[1]),length(k[1]))])
-                      for k in aligned_seqs]) > 1)]
+            if !(sum([x==(k[1][1:min(length(x[1]),length(k[1]))], k[2][1:min(length(x[1]),length(k[1]))]) &&
+                      (length(x)<length(k) || ((length(x)==length(k)) && (i<j)))
+                      for (j,k) in enumerate(aligned_seqs)]) > 0)]
     end
 
     return (score_matrix, trace_matrix, all_alignments)
