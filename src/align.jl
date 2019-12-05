@@ -52,7 +52,7 @@ function align(fp1::String, fp2::String;
     seqA_id, seqA = read_input(fp1)
     seqB_id, seqB = read_input(fp2)
     if submatfp!=false
-        sub_header, sub_matrix = read_sub_matrix(fp=submatfp)
+        sub_header, sub_matrix = read_sub_matrix(submatfp)
     else
         sub_header, sub_matrix = BLOSUM62
     end
