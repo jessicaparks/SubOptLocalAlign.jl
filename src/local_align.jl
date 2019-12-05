@@ -100,7 +100,7 @@ end
 
 
 """
-    deduplicate(align_pos::CartesianIndex{2},
+    deduplicate(align_pos::Union{CartesianIndex{2},Tuple{Int,Int}},
         trace_matrix::Array{Array{Int,1},2},
         score_matrix::Array{Int,2},
         thresh::Int, lenA::Int, lenB::Int)
@@ -112,15 +112,16 @@ Return `true` if the alignment position is contained within a parent alignment, 
   
 ---
 # Arguments:
-- `align_pos::CartesianIndex{2}`: coordinates of the alignment position.
+- `align_pos::Union{CartesianIndex{2},Tuple{Int,Int}}`: coordinates of the alignment position.
 - `trace_matrix::Array{Array{Int,1},2}`: alignment traceback matrix.
 - `score_matrix::Array{Int,2}`: score matrix for the alignment.
 - `thresh::Int`: alignment score threshold.
 - `lenA::Int`: length of seqA + 1 (the max size of the alignment in the a direction).
 - `lenB::Int`: length of seqB + 1 (the max size of the alignment in the b direction).
 """
-function deduplicate(align_pos::CartesianIndex{2}, trace_matrix::Array{Array{Int,1},2},
-                     score_matrix::Array{Int,2}, thresh::Int, lenA::Int, lenB::Int)
+function deduplicate(align_pos::Union{CartesianIndex{2},Tuple{Int,Int}},
+                     trace_matrix::Array{Array{Int,1},2}, score_matrix::Array{Int,2},
+                     thresh::Int, lenA::Int, lenB::Int)
 
     (a, b) = Tuple(align_pos)
     if a==lenA && b==lenB
