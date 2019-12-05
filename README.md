@@ -13,6 +13,9 @@ Install from the Julia REPL or from Jupyter:
 using Pkg
 Pkg.add(PackageSpec(url="https://github.com/jessicaparks/SubOptLocalAlign.jl"))
 ```
+This assumes you already have [Julia](https://julialang.org/downloads/) installed. Output will display best in an interactive
+environment, such as [Jupyter Lab](https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html),
+which also requires [IJulia](https://github.com/JuliaLang/IJulia.jl).
 
 ## Usage
 
