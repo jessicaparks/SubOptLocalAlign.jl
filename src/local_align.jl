@@ -203,7 +203,7 @@ function local_align(seqA::String, seqB::String,
             pos for pos in align_ends 
                 if !deduplicate(pos, trace_matrix, score_matrix, thresh, length(seqA)+1, length(seqB)+1)]
     end
-    all_alignments = []
+    all_alignments = Array{Array{Any,1},1}()
     for align_pos in align_ends
         alignments = Array{Tuple{String,String},1}()
         pos_scores = Array{Array{Int,1},1}()
@@ -231,7 +231,7 @@ function local_align(seqA::String, seqB::String,
     # remove any remaining child alignments if deduplicating by score
     if dedup && dedup_method == "score"
         aligned_seqs = [x[4] for x in all_alignments]
-        all_alignments = [
+        final_alignments = [
             all_alignments[i] for (i,x) in enumerate(aligned_seqs)
             if !(sum([x==(k[1][1:min(length(x[1]),length(k[1]))], k[2][1:min(length(x[1]),length(k[1]))]) &&
                       (length(x)<length(k) || ((length(x)==length(k)) && (i<j)))
